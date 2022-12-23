@@ -11,11 +11,20 @@ npm install onfido-webview-component
 ## Usage
 
 ```js
-import { multiply } from 'onfido-webview-component';
+import { OnfidoWebView, OnfidoWebViewProps } from 'onfido-webview-component';
 
-// ...
+// ... type usage
 
-const result = await multiply(3, 7);
+const parameters: OnfidoWebViewProps = {...}
+
+//.... component usage
+
+<OnfidoWebView region={'EU'}  
+        parameters={parameters} 
+        onComplete={(e) => {
+         alert(JSON.stringify(e))
+     }}/>
+
 ```
 
 ## Contributing

@@ -68,7 +68,7 @@ export type SdkResponse = {
   active_video?: ActiveVideoResponse,
 }
 
-export type OnfidoWebView = {
+export type OnfidoWebViewProps = {
   region: Region,
   version?: string,
   webviewPros?: WebViewProps,
@@ -89,7 +89,7 @@ const defaultWebViewProps: WebViewProps = {
 };
 
 
-export const OnfidoWebView: FunctionComponent<OnfidoProps> = props => {
+export const OnfidoWebView: FunctionComponent<OnfidoWebViewProps> = props => {
   const ref = React.createRef();
 
   const uri = `https://sdk.${props.region.toLowerCase()}.onfido.app/frame`;
