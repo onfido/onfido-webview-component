@@ -176,6 +176,7 @@ export const OnfidoWebView: FunctionComponent<OnfidoWebViewProps> = (props) => {
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = JSON.parse(event.nativeEvent.data);
     console.log(event, data);
+    // @ts-ignore
     props[data.method] && props[data.method](data.data);
   };
 
@@ -184,6 +185,7 @@ export const OnfidoWebView: FunctionComponent<OnfidoWebViewProps> = (props) => {
       {...props.webviewPros}
       {...defaultWebViewProps}
       source={{ uri: uri }}
+      // @ts-ignore
       ref={ref}
       onMessage={handleMessage}
       injectedJavaScriptForMainFrameOnly={true}

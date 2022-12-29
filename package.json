@@ -1,7 +1,7 @@
 {
   "name": "onfido-webview-component",
   "version": "0.1.0",
-  "description": "test",
+  "description": "Onfido custome reaact-native-webview",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",
   "types": "dist/typescript/src/index.d.ts",
@@ -42,7 +42,7 @@
     "android"
   ],
   "repository": "https://github.com/onfido/onfido-webview-component",
-  "author": "ZOe Azhdari <zoe.radkani@onfido.com> (https://github.com/zoeradkani)",
+  "author": "Onfido",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/onfido/onfido-webview-component/issues"
@@ -149,12 +149,6 @@
     "source": "src",
     "output": "dist",
     "targets": [
-      [
-        "aar",
-        {
-          "reverseJetify": true
-        }
-      ],
       "commonjs",
       "module",
       "typescript"
