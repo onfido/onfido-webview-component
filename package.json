@@ -149,10 +149,18 @@
     "source": "src",
     "output": "dist",
     "targets": [
-      ["aar", {"reverseJetify": true}],
+      [
+        "aar",
+        {
+          "reverseJetify": true
+        }
+      ],
       "commonjs",
       "module",
       "typescript"
     ]
+  },
+  "dependencies": {
+    "react-native-webview": "^11.26.0"
   }
 }

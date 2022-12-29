@@ -1,103 +1,106 @@
-import React, { FunctionComponent } from "react";
-import type { WebViewMessageEvent, WebViewProps } from "react-native-webview";
-import { WebView } from "react-native-webview";
+import React, { FunctionComponent } from 'react';
+import type { WebViewMessageEvent, WebViewProps } from 'react-native-webview';
+import { WebView } from 'react-native-webview';
 
-
-export type Region = "EU" | "US" | "CA";
+export type Region = 'EU' | 'US' | 'CA';
 export type SdkParameters = {};
 
 export type SupportedLanguages =
-  | "en_US"
-  | "en"
-  | "de_DE"
-  | "de"
-  | "es_ES"
-  | "es"
-  | "fr_FR"
-  | "fr"
-  | "it_IT"
-  | "it"
-  | "pt_PT"
-  | "pt"
-  | "nl_NL"
-  | "nl";
+  | 'en_US'
+  | 'en'
+  | 'de_DE'
+  | 'de'
+  | 'es_ES'
+  | 'es'
+  | 'fr_FR'
+  | 'fr'
+  | 'it_IT'
+  | 'it'
+  | 'pt_PT'
+  | 'pt'
+  | 'nl_NL'
+  | 'nl';
+
+export type RequestedVariant = 'standard' | 'video' | 'motion';
+
+export type DocumentTypes =
+  | 'passport'
+  | 'driving_licence'
+  | 'national_identity_card'
+  | 'residence_permit';
 
 export type SdkOptions = {
-  token: string,
-  language?: SupportedLanguages,
-  smsNumberCountryCode?: string,
+  token: string;
+  language?: SupportedLanguages;
+  smsNumberCountryCode?: string;
   userDetails?: {
-    smsNumber?: string,
-  },
-  steps?: Array<any>,
-  autoFocusOnInitialScreenTitle?: boolean,
-  crossDeviceClientIntroProductName?: string,
-  crossDeviceClientIntroProductLogoSrc?: string,
-  workflowRunId?: string,
+    smsNumber?: string;
+  };
+  steps?: Array<any>;
+  autoFocusOnInitialScreenTitle?: boolean;
+  crossDeviceClientIntroProductName?: string;
+  crossDeviceClientIntroProductLogoSrc?: string;
+  workflowRunId?: string;
 };
 
 export type DocumentResponse = {
-  id: string,
-  side: string,
-  type: DocumentTypes,
-  variant: RequestedVariant,
-}
+  id: string;
+  side: string;
+  type: DocumentTypes;
+  variant: RequestedVariant;
+};
 
 export type DocumentVideoResponse = {
-  id: string,
-  media_uuids: string[],
-  variant: 'video',
-}
+  id: string;
+  media_uuids: string[];
+  variant: 'video';
+};
 
 export type FaceResponse = {
-  id: string,
-  variant: RequestedVariant,
-}
+  id: string;
+  variant: RequestedVariant;
+};
 
 export type ActiveVideoResponse = {
-  id: string
-}
+  id: string;
+};
 
 export type SdkResponse = {
-  document_front?: DocumentResponse,
-  document_back?: DocumentResponse,
-  document_video?: DocumentVideoResponse,
-  face?: FaceResponse,
-  data?: any,
-  poa?: DocumentResponse,
-  active_video?: ActiveVideoResponse,
-}
+  document_front?: DocumentResponse;
+  document_back?: DocumentResponse;
+  document_video?: DocumentVideoResponse;
+  face?: FaceResponse;
+  data?: any;
+  poa?: DocumentResponse;
+  active_video?: ActiveVideoResponse;
+};
 
 export type OnfidoWebViewProps = {
-  region: Region,
-  version?: string,
-  webviewPros?: WebViewProps,
-  parameters: SdkParameters,
-  onComplete?: (data: SdkResponse) => void,
-  onError?: (data: SdkError) => void,
-  onComplete?: (data: SdkResponse) => void
+  region: Region;
+  version?: string;
+  webviewPros?: WebViewProps;
+  parameters: SdkParameters;
+  onComplete?: (data: SdkResponse) => void;
+  onError?: (data: SdkError) => void;
+  onExit?: (data: SdkResponse) => void;
 };
 
 export type SdkError = {
-  type: 'exception' | 'expired_token',
-  message: string
-}
-
+  type: 'exception' | 'expired_token';
+  message: string;
+};
 
 const defaultWebViewProps: WebViewProps = {
   allowsInlineMediaPlayback: true,
 };
 
-
-export const OnfidoWebView: FunctionComponent<OnfidoWebViewProps> = props => {
+export const OnfidoWebView: FunctionComponent<OnfidoWebViewProps> = (props) => {
   const ref = React.createRef();
 
   const uri = `https://sdk.${props.region.toLowerCase()}.onfido.app/frame`;
 
   const bootstrapSdk = () => {
-
-    const {version, parameters} = props
-
+    const { version, parameters } = props;
 
     const script = `
       const bootstrap = (async () => {
@@ -172,24 +175,21 @@ export const OnfidoWebView: FunctionComponent<OnfidoWebViewProps> = props => {
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = JSON.parse(event.nativeEvent.data);
-    console.log(event, data)
+    console.log(event, data);
     props[data.method] && props[data.method](data.data);
   };
 
-  let sdk = undefined;
-  let loaded = false;
-
-  return <WebView
-    {...props.webviewPros}
-    {...defaultWebViewProps}
-    source={{ uri: uri }}
-    ref={ref}
-    onMessage={handleMessage}
-    injectedJavaScriptForMainFrameOnly={true}
-    injectedJavaScript={bootstrapSdk()}
-
-  />;
-
+  return (
+    <WebView
+      {...props.webviewPros}
+      {...defaultWebViewProps}
+      source={{ uri: uri }}
+      ref={ref}
+      onMessage={handleMessage}
+      injectedJavaScriptForMainFrameOnly={true}
+      injectedJavaScript={bootstrapSdk()}
+    />
+  );
 };
 
 export function multiply(a: number, b: number): Promise<number> {
