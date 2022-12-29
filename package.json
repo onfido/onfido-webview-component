@@ -42,7 +42,7 @@
     "android"
   ],
   "repository": "https://github.com/onfido/onfido-webview-component",
-  "author": "ZOe Azhdari <zoe.radkani@onfido.com> (https://github.com/zoeradkani)",
+  "author": "Onfido",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/onfido/onfido-webview-component/issues"
