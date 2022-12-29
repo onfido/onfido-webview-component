@@ -1,6 +1,6 @@
 {
   "name": "onfido-webview-component",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Onfido custome reaact-native-webview",
   "main": "dist/commonjs/index.js",
   "module": "dist/module/index.js",
