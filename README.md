@@ -1,6 +1,6 @@
 # onfido-webview-component
 
-SOmehitng
+A standalone component extending the existing  react-native-webview in order to integrating with latest version of [Onfido Web SDK](https://github.com/onfido/onfido-sdk-ui) on mobile apps. 
 
 ## Installation
 
